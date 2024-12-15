@@ -1,10 +1,10 @@
 class_name Spell
 
 var name: String
-var sequences: Array
+var sequences: String
 var effect: String
 
-func _init(name: String, sequences: Array, effect: String):
+func _init(name: String, sequences: String, effect: String):
 	self.name = name
 	self.sequences = sequences
 	self.effect = effect

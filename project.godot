@@ -21,6 +21,10 @@ window/size/viewport_width=720
 window/size/viewport_height=480
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/copilot/plugin.cfg")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

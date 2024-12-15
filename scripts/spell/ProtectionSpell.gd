@@ -1,7 +1,7 @@
 extends Spell
 class_name ProtectionSpell
 
-func _init(name: String, sequences: Array, effect: String):
+func _init(name: String, sequences: String, effect: String):
 	super(name, sequences, effect)
 
 func apply_effect():
