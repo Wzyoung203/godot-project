@@ -7,6 +7,7 @@ func _ready() -> void:
 	print("法术数据库加载完成：")
 	STree.print_trie()
 	STree.print_spells()
+	STree.search("pe")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

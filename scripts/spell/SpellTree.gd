@@ -49,3 +49,22 @@ func print_trie(node: SpellNode = root, prefix: String = "") -> void:
 
 func print_spells():
 	print(spells)	
+
+# 根据已有的法术树，搜索输入序列：是法术返回该法术，不是则返回空
+func search(sequence: String) -> Spell:
+	var currentNode = root
+	for char in sequence:
+		if currentNode.get_child(char):		currentNode = currentNode.get_child(char)
+		else:	 
+				#print("Sesarch failed: The seq is not in tree")
+				return null
+	if currentNode.get_is_spell():
+		#print("Sesarch success")
+		return currentNode.get_spell()
+	else:
+		#print("Sesarch failed: The seq is not a spell")
+		return null	
+		
+		
+		
+		
