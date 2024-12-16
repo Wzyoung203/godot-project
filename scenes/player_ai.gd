@@ -26,4 +26,3 @@ func turn_end():
 	
 func flip():
 	$AnimatedSprite2D.flip_h = true
-	

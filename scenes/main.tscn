@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnlr3cgg3jm6o"]
+[gd_scene load_steps=5 format=3 uid="uid://cnlr3cgg3jm6o"]
 
-[ext_resource type="PackedScene" uid="uid://bewwldnwj4pbg" path="res://scenes/player_human.tscn" id="1_0e620"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_422m7"]
-[ext_resource type="Script" path="res://scenes/player_generator.gd" id="2_71wj0"]
-[ext_resource type="Script" path="res://scenes/turn_manager.gd" id="3_ma1ex"]
+[ext_resource type="Script" path="res://scripts/player_generator.gd" id="2_71wj0"]
+[ext_resource type="Script" path="res://scripts/turn_manager.gd" id="3_ma1ex"]
 [ext_resource type="FontFile" uid="uid://wq6bhg757pv0" path="res://fonts/Xolonium-Regular.ttf" id="4_v0q3r"]
-[ext_resource type="PackedScene" uid="uid://d2gvj7ft02lp8" path="res://scenes/input_manager.tscn" id="6_tu86h"]
-[ext_resource type="PackedScene" uid="uid://b4d6lgk4hf6x4" path="res://scenes/spell_manager.tscn" id="7_7hjff"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_422m7")
@@ -14,10 +11,11 @@ script = ExtResource("1_422m7")
 [node name="PlayerGenerator" type="Node" parent="."]
 script = ExtResource("2_71wj0")
 
-[node name="Player_human" parent="PlayerGenerator" instance=ExtResource("1_0e620")]
-
-[node name="StartPosition" type="Marker2D" parent="PlayerGenerator"]
+[node name="StartPosition1" type="Marker2D" parent="PlayerGenerator"]
 position = Vector2(100, 240)
+
+[node name="StartPosition2" type="Marker2D" parent="PlayerGenerator"]
+position = Vector2(620, 240)
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("3_ma1ex")
@@ -34,8 +32,4 @@ theme_override_fonts/font = ExtResource("4_v0q3r")
 theme_override_font_sizes/font_size = 32
 text = "Turn Stage"
 
-[node name="InputManager" parent="." instance=ExtResource("6_tu86h")]
-
-[node name="SpellManager" parent="." instance=ExtResource("7_7hjff")]
-
-[connection signal="end_turn" from="InputManager" to="TurnManager" method="end_player_turn"]
+[connection signal="end_turn" from="PlayerGenerator" to="TurnManager" method="end_player_turn"]

@@ -1,8 +1,12 @@
 extends Node
 
-@onready var turn_stage : Label = $TurnStage as Label
+@onready var turnStage: Label = $TurnStage as Label
 
+signal player_turn
 signal effect_trigger
+signal effect_resolve
+signal turn_end
+
 enum TurnState {
 	PLAYER_TURN,
 	EFFECT_TRIGGER,
@@ -14,6 +18,8 @@ var current_turn_state = TurnState.PLAYER_TURN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not turnStage:
+		return
 	start_player_turn()
 
 
@@ -21,12 +27,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-func start_player_turn():
-	current_turn_state = TurnState.PLAYER_TURN
-	update_stage_text("player_turn")	# 显示玩家操作界面
-	# 允许玩家进行操作
-	# $EndTurnButton.disabled = false
 
 func end_player_turn():
 	if current_turn_state == TurnState.PLAYER_TURN:
@@ -38,24 +38,33 @@ func end_player_turn():
 		# $EndTurnButton.disabled = true
 		return
 
+func start_player_turn():
+	current_turn_state = TurnState.PLAYER_TURN
+	update_turn_state("PLAYER TURN")
+	player_turn.emit()
+	# 允许玩家进行操作
+	# $EndTurnButton.disabled = false
+
 func trigger_effects():
 	current_turn_state = TurnState.EFFECT_TRIGGER
-	update_stage_text("Trigger Effects")
+	update_turn_state("EFFECT TRIGGER")
 	effect_trigger.emit()
 	# 处理玩家和AI的效果发动(在玩家对象中实现)
 
 func resolve_effects():
 	current_turn_state = TurnState.EFFECT_RESOLVE
-	update_stage_text("Resolve Effects")
+	update_turn_state("EFFECT RESOLVE")
+	effect_resolve.emit()
 	# 应用效果到目标
 
 func end_turn():
 	current_turn_state = TurnState.TURN_END
+	update_turn_state("TURN END")
+	turn_end.emit()
 	# 处理回合结束的逻辑，判断游戏状态
 	# 若没结束
 	# 准备下一个回合
-	
-func update_stage_text(text):
-	turn_stage.text = text
-	
+
+func update_turn_state(text):
+	turnStage.text = text
 	

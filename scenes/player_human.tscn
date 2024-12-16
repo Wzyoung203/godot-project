@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bewwldnwj4pbg"]
+[gd_scene load_steps=14 format=3 uid="uid://bewwldnwj4pbg"]
 
 [ext_resource type="Script" path="res://scripts/player_human.gd" id="1_ktp6b"]
 [ext_resource type="Texture2D" uid="uid://bqgtun3vps2up" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f0.png" id="1_sk13t"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cdehr6fxl2xaf" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f2.png" id="3_rakjk"]
 [ext_resource type="Texture2D" uid="uid://b40l1hxqp0qqb" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f3.png" id="4_inn20"]
 [ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="6_1xkvo"]
+[ext_resource type="FontFile" uid="uid://wq6bhg757pv0" path="res://fonts/Xolonium-Regular.ttf" id="7_nc7r3"]
+[ext_resource type="PackedScene" uid="uid://b4d6lgk4hf6x4" path="res://scenes/spell_manager.tscn" id="8_m0edq"]
+[ext_resource type="Script" path="res://scripts/input_processor.gd" id="9_byq1v"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="9_mx3tl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
 animations = [{
@@ -29,6 +33,8 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yp56"]
 size = Vector2(21.3333, 26.6667)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ocqhi"]
 
 [node name="Player_human" type="Area2D"]
 script = ExtResource("1_ktp6b")
@@ -61,3 +67,79 @@ max_value = 14.0
 step = 1.0
 value = 13.0
 show_percentage = false
+
+[node name="InputManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_mx3tl")
+
+[node name="LeftHand" type="OptionButton" parent="InputManager"]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -64.0
+offset_right = -11.0
+offset_bottom = -33.0
+theme_override_fonts/font = ExtResource("7_nc7r3")
+selected = 1
+item_count = 7
+popup/item_0/text = "f"
+popup/item_0/icon = SubResource("ViewportTexture_ocqhi")
+popup/item_1/text = "p"
+popup/item_1/id = 1
+popup/item_2/text = "s"
+popup/item_2/id = 2
+popup/item_3/text = "w"
+popup/item_3/id = 3
+popup/item_4/text = "d"
+popup/item_4/id = 4
+popup/item_5/text = "c"
+popup/item_5/id = 5
+popup/item_6/text = "stab"
+popup/item_6/id = 6
+
+[node name="RightHand" type="OptionButton" parent="InputManager"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -64.0
+offset_right = 85.0
+offset_bottom = -36.0
+theme_override_fonts/font = ExtResource("7_nc7r3")
+selected = 1
+item_count = 7
+popup/item_0/text = "f"
+popup/item_1/text = "p"
+popup/item_1/id = 1
+popup/item_2/text = "s"
+popup/item_2/id = 2
+popup/item_3/text = "w"
+popup/item_3/id = 3
+popup/item_4/text = "d"
+popup/item_4/id = 4
+popup/item_5/text = "c"
+popup/item_5/id = 5
+popup/item_6/text = "stab"
+popup/item_6/id = 6
+
+[node name="EndTurnButton" type="Button" parent="InputManager"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -48.0
+offset_top = 80.0
+offset_right = 57.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("7_nc7r3")
+theme_override_font_sizes/font_size = 20
+text = "End Turn"
+
+[node name="SpellManager" parent="." instance=ExtResource("8_m0edq")]
+
+[node name="InputProcessor" type="Node2D" parent="SpellManager"]
+script = ExtResource("9_byq1v")
+
+[connection signal="end_turn" from="InputManager" to="." method="turn_end"]
+[connection signal="spells" from="InputManager" to="SpellManager/InputProcessor" method="process_input"]
+[connection signal="pressed" from="InputManager/EndTurnButton" to="InputManager" method="_on_end_turn_button_pressed"]
