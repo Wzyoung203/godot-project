@@ -140,6 +140,7 @@ text = "End Turn"
 [node name="InputProcessor" type="Node2D" parent="SpellManager"]
 script = ExtResource("9_byq1v")
 
+[node name="SpellSelector" type="Node2D" parent="SpellManager"]
+
 [connection signal="end_turn" from="InputManager" to="." method="turn_end"]
-[connection signal="spells" from="InputManager" to="SpellManager/InputProcessor" method="process_input"]
 [connection signal="pressed" from="InputManager/EndTurnButton" to="InputManager" method="_on_end_turn_button_pressed"]

@@ -1,0 +1,10 @@
+extends Node
+
+# 回合阶段信号
+signal player_turn_end
+
+# 传入输入信号
+signal spells_on_hands(lefthand:String,rightHand:String)
+
+# 输入处理完毕信号
+signal input_process_success

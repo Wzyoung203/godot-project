@@ -36,6 +36,11 @@ func get_is_spell() -> bool:
 
 func get_children() -> Array:
 	return _children
+func get_children_value() -> Array:
+	var children_name = []
+	for _child in _children:
+		children_name.append(_child.get_value())
+	return children_name
 
 func get_parent() -> SpellNode:
 	return _parent
@@ -48,6 +53,9 @@ func set_value(new_value: String) -> void:
 
 func set_is_spell(new_is_spell: bool) -> void:
 	_isSpell = new_is_spell
+
+func set_spell(new_spell: Spell) -> void:
+	_spell = new_spell
 
 func set_children(new_children: Array) -> void:
 	_children = new_children

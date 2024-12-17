@@ -17,7 +17,8 @@ func getInfo():
 	return  info
 func getEffect():
 	self.effect = effect	
-
+func getName():
+	return name
 func cast():
 	print("Casting: ", name)
 	# 基类效果应用逻辑，可以被子类覆盖

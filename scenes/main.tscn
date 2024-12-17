@@ -31,5 +31,3 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("4_v0q3r")
 theme_override_font_sizes/font_size = 32
 text = "Turn Stage"
-
-[connection signal="end_turn" from="PlayerGenerator" to="TurnManager" method="end_player_turn"]

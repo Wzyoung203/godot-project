@@ -15,13 +15,14 @@ enum TurnState {
 }
 
 var current_turn_state = TurnState.PLAYER_TURN
+# We need two players to finish their respective rounds 
+#before moving on to the next stage
+var turn_end_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not turnStage:
-		return
 	start_player_turn()
-
+	Events.player_turn_end.connect(end_player_turn)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -39,6 +40,7 @@ func end_player_turn():
 		return
 
 func start_player_turn():
+	
 	current_turn_state = TurnState.PLAYER_TURN
 	update_turn_state("PLAYER TURN")
 	player_turn.emit()

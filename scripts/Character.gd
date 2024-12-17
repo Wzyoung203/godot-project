@@ -5,8 +5,7 @@ var health: int
 var max_health: int  
 
 func _ready():
-	self.max_health = max_health
-	self.health = max_health
+	health = max_health
 	update_health_bar()
 
 func take_damage(damage: int):

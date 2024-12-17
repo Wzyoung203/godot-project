@@ -1,7 +1,6 @@
 extends Player
 
 @onready var health_bar = $HealthBar
-signal player_turn_end
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -19,10 +18,6 @@ func update_health_bar():
 		fill.bg_color = Color(1,1,0)
 	if health <= max_health/4:
 		fill.bg_color = Color(1,0,0)
-
-func turn_end():
-	player_turn_end.emit()
-	#print("玩家回合结束")
 	
 func flip():
 	$AnimatedSprite2D.flip_h = true
