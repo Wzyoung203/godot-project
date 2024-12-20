@@ -1,3 +1,4 @@
+extends Node
 class_name SpellTree
 # 存储法术的字典树
 var root: SpellNode
@@ -5,6 +6,9 @@ var spells: Array
 
 func _init():
 	self.creat_spell_tree()
+	self.preload_trie()
+	self.print_spells()
+
 func creat_spell_tree():
 	root = SpellNode.new()
 	add_spell("p",Sheild.new(),root)
@@ -78,8 +82,8 @@ func search(sequence: String) -> Spell:
 		return null	
 
 # 根据输入历史查找可使用的法术
-func search_valid_spells(sequence: String) -> Array:
-	var valid_spells: Array = []
+func search_valid_spells(sequence: String) -> Array[Spell]:
+	var valid_spells: Array[Spell] = []
 	while sequence.length() > 0:
 		if search(sequence):
 			valid_spells.append(search(sequence))

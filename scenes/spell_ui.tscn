@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://es2g4x8qgqpd"]
+
+[ext_resource type="Script" path="res://scripts/spell_ui.gd" id="1_fo822"]
+
+[node name="SpellUI" type="VBoxContainer"]
+visible = false
+offset_right = 305.0
+offset_bottom = 231.0
+size_flags_horizontal = 4
+script = ExtResource("1_fo822")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Which spell do you want to use?"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+allow_search = false
+auto_height = true
+text_overrun_behavior = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Cancel" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="empty" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Confirm" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Confirm"
+
+[connection signal="item_activated" from="ItemList" to="." method="_activate_confirm_btn"]
+[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_cancel"]
+[connection signal="pressed" from="HBoxContainer/Confirm" to="." method="_confirm"]

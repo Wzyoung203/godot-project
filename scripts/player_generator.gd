@@ -17,8 +17,8 @@ func start():
 	add_child(player_1)
 	player_1.position = start_position1.global_position
 	
-	#var PLAYER_AI = preload("res://scenes/player_AI.tscn")
-	#var player_2 = PLAYER_AI.instantiate()
-	#add_child(player_2)
-	#player_2.position = start_position2.global_position
-	#player_2.flip()
+	var PLAYER_AI = preload("res://scenes/player_AI.tscn")
+	var player_2 = PLAYER_AI.instantiate()
+	add_child(player_2)
+	player_2.position = start_position2.global_position
+	player_2.flip()
