@@ -11,3 +11,6 @@ signal input_process_success
 
 # 发送即将释放的法术信号
 signal selected_spell(spell:Spell)
+
+# 选中目标信号
+signal selected_target(character: Character)

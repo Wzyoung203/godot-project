@@ -20,7 +20,8 @@ func enquiry_vaild_spell():
 	left_vaild_spells = spell_tree.search_valid_spells($InputProcessor.history_left_input_string)
 	display_vaild_spell(left_vaild_spells)
 	right_vaild_spells = spell_tree.search_valid_spells($InputProcessor.history_right_input_string)
-	display_vaild_spell(right_vaild_spells)
+	#TODO.. 
+	# display_vaild_spell(right_vaild_spells)
 
 
 func display_vaild_spell(spells: Array[Spell]):

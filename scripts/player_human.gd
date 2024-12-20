@@ -1,6 +1,7 @@
 extends Player
-
+class_name PlayerHuman
 @onready var health_bar = $HealthBar
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()

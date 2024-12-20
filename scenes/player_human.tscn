@@ -32,8 +32,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yp56"]
-size = Vector2(21.3333, 26.6667)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruy4m"]
+size = Vector2(56, 67)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ocqhi"]
 
@@ -47,9 +47,15 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.90735e-06, 16)
-scale = Vector2(3, 3)
-shape = SubResource("RectangleShape2D_3yp56")
+position = Vector2(-1, 12.5)
+shape = SubResource("RectangleShape2D_ruy4m")
+
+[node name="Target" type="Panel" parent="."]
+clip_children = 1
+offset_left = -37.0
+offset_top = -28.0
+offset_right = 35.0
+offset_bottom = 47.0
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 anchors_preset = 12
@@ -144,5 +150,7 @@ script = ExtResource("9_byq1v")
 
 [node name="SpellUI" parent="SpellManager" instance=ExtResource("11_nu8mi")]
 
+[connection signal="gui_input" from="Target" to="." method="_area_selected"]
+[connection signal="mouse_exited" from="Target" to="." method="_area_exited"]
 [connection signal="end_turn" from="InputManager" to="." method="turn_end"]
 [connection signal="pressed" from="InputManager/EndTurnButton" to="InputManager" method="_on_end_turn_button_pressed"]

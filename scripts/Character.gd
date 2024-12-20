@@ -28,3 +28,18 @@ func die():
 
 func update_health_bar():
 	pass
+
+func _area_exited():
+	var cursor = load("res://cursor/PNG/Basic/Default/pointer_c.png")
+	Input.set_custom_mouse_cursor(cursor)
+
+func _area_selected(event: InputEvent):
+	var cursor = load("res://cursor/PNG/Basic/Default/target_round_b.png")
+	Input.set_custom_mouse_cursor(cursor)
+	if event is InputEventMouseButton and event.pressed:
+		print("选择角色：",self)
+		_selected_target()
+
+
+func _selected_target():
+	Events.selected_target.emit(self)

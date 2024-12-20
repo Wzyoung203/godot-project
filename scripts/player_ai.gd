@@ -25,4 +25,4 @@ func turn_end():
 	#print("玩家回合结束")
 	
 func flip():
-	$AnimatedSprite2D.flip_h = true
+	$AnimatedSprite2D.flip_h = true	

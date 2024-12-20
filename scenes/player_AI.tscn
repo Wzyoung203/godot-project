@@ -61,3 +61,13 @@ max_value = 14.0
 step = 1.0
 value = 7.0
 show_percentage = false
+
+[node name="Target" type="Panel" parent="."]
+clip_children = 1
+offset_left = -37.0
+offset_top = -28.0
+offset_right = 35.0
+offset_bottom = 47.0
+
+[connection signal="gui_input" from="Target" to="." method="_area_selected"]
+[connection signal="mouse_exited" from="Target" to="." method="_area_exited"]

@@ -9,7 +9,12 @@ func display(spells: Array[Spell]) -> void:
 		menu.add_item(spell.getName())
 		menu.set_item_metadata(i, spell)
 		i=i+1
-	
+	var screen_size = get_viewport_rect().size
+	print(screen_size)
+	var component_size = self.size
+	print(component_size)
+	var new_position = (screen_size - component_size) / 2
+	self.global_position = new_position
 
 func _cancel():
 	menu.clear()

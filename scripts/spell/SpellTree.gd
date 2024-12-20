@@ -85,8 +85,15 @@ func search(sequence: String) -> Spell:
 func search_valid_spells(sequence: String) -> Array[Spell]:
 	var valid_spells: Array[Spell] = []
 	while sequence.length() > 0:
+		# 按大写（双手手势）搜索
 		if search(sequence):
 			valid_spells.append(search(sequence))
+		# 按小写（单手手势）搜索
+		if sequence[0] != sequence[0].to_lower():
+			sequence[0] = sequence[0].to_lower()
+			if search(sequence):
+				valid_spells.append(search(sequence))
+			
 		sequence = sequence.substr(1)
 	#if valid_spells.size() > 0:
 		#print("找到了法术！")
