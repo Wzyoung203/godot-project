@@ -1,16 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://bewwldnwj4pbg"]
+[gd_scene load_steps=18 format=3 uid="uid://bewwldnwj4pbg"]
 
-[ext_resource type="Script" path="res://scripts/player_human.gd" id="1_ktp6b"]
+[ext_resource type="Script" path="res://scripts/character/player/player_human.gd" id="1_ktp6b"]
 [ext_resource type="Texture2D" uid="uid://bqgtun3vps2up" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f0.png" id="1_sk13t"]
 [ext_resource type="Texture2D" uid="uid://cphwrktkinq8m" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f1.png" id="2_lbdfc"]
 [ext_resource type="Texture2D" uid="uid://cdehr6fxl2xaf" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f2.png" id="3_rakjk"]
 [ext_resource type="Texture2D" uid="uid://b40l1hxqp0qqb" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f3.png" id="4_inn20"]
 [ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="6_1xkvo"]
+[ext_resource type="Script" path="res://scripts/target.gd" id="6_r5qq1"]
 [ext_resource type="FontFile" uid="uid://wq6bhg757pv0" path="res://fonts/Xolonium-Regular.ttf" id="7_nc7r3"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="8_3n168"]
 [ext_resource type="PackedScene" uid="uid://b4d6lgk4hf6x4" path="res://scenes/spell_manager.tscn" id="8_m0edq"]
 [ext_resource type="Script" path="res://scripts/input_processor.gd" id="9_byq1v"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="9_mx3tl"]
 [ext_resource type="PackedScene" uid="uid://es2g4x8qgqpd" path="res://scenes/spell_ui.tscn" id="11_nu8mi"]
+[ext_resource type="Script" path="res://scripts/target_selector.gd" id="11_qecw6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
 animations = [{
@@ -56,6 +59,7 @@ offset_left = -37.0
 offset_top = -28.0
 offset_right = 35.0
 offset_bottom = 47.0
+script = ExtResource("6_r5qq1")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 anchors_preset = 12
@@ -73,6 +77,7 @@ max_value = 14.0
 step = 1.0
 value = 13.0
 show_percentage = false
+script = ExtResource("8_3n168")
 
 [node name="InputManager" type="Control" parent="."]
 layout_mode = 3
@@ -147,6 +152,9 @@ text = "End Turn"
 script = ExtResource("9_byq1v")
 
 [node name="SpellSelector" type="Node2D" parent="SpellManager"]
+
+[node name="TargetSelector" type="Node2D" parent="SpellManager"]
+script = ExtResource("11_qecw6")
 
 [node name="SpellUI" parent="SpellManager" instance=ExtResource("11_nu8mi")]
 

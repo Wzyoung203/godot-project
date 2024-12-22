@@ -2,15 +2,10 @@ extends Node
 
 @onready var turnStage: Label = $TurnStage as Label
 
-signal player_turn
-signal effect_trigger
-signal effect_resolve
-signal turn_end
-
 enum TurnState {
 	PLAYER_TURN,
-	EFFECT_TRIGGER,
-	EFFECT_RESOLVE,
+	SPELL_SELECT,
+	SPELL_EFFECT,
 	TURN_END
 }
 
@@ -22,50 +17,37 @@ var turn_end_count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_player_turn()
-	Events.player_turn_end.connect(end_player_turn)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func end_player_turn():
-	if current_turn_state == TurnState.PLAYER_TURN:
-		trigger_effects()
-		return
-	if current_turn_state == TurnState.EFFECT_TRIGGER:
-		resolve_effects()
-		# 转入魔法生效阶段，按钮禁用，直至下一回合开始
-		# $EndTurnButton.disabled = true
-		return
+	Events.player_turn_end.connect(spell_select)
+	Events.select_end.connect(effect_spells)
+	Events.effect_end.connect(end_turn)
 
 func start_player_turn():
-	
 	current_turn_state = TurnState.PLAYER_TURN
 	update_turn_state("PLAYER TURN")
-	player_turn.emit()
-	# 允许玩家进行操作
-	# $EndTurnButton.disabled = false
+	Events.player_turn.emit()
 
-func trigger_effects():
-	current_turn_state = TurnState.EFFECT_TRIGGER
-	update_turn_state("EFFECT TRIGGER")
-	effect_trigger.emit()
-	# 处理玩家和AI的效果发动(在玩家对象中实现)
+# 处理玩家和AI的选择目标(在玩家对象中实现)
+func spell_select():
+	current_turn_state = TurnState.SPELL_SELECT
+	update_turn_state("SPELL SELECT")
+	Events.spell_select.emit()
+	
 
-func resolve_effects():
-	current_turn_state = TurnState.EFFECT_RESOLVE
-	update_turn_state("EFFECT RESOLVE")
-	effect_resolve.emit()
+func effect_spells():
+	current_turn_state = TurnState.SPELL_EFFECT
+	update_turn_state("SPELL EFFECT")
+	Events.spell_effect.emit()
 	# 应用效果到目标
 
 func end_turn():
 	current_turn_state = TurnState.TURN_END
 	update_turn_state("TURN END")
-	turn_end.emit()
+	Events.turn_end.emit()
 	# 处理回合结束的逻辑，判断游戏状态
 	# 若没结束
 	# 准备下一个回合
+	
+	start_player_turn()
 
 func update_turn_state(text):
 	turnStage.text = text
