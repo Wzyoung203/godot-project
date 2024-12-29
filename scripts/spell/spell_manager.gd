@@ -10,11 +10,6 @@ func _ready() -> void:
 	
 	Events.input_process_success.connect(enquiry_vaild_spell)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
 func enquiry_vaild_spell():
 	print("Which Spell do you want to use?")
 	left_vaild_spells = spell_tree.search_valid_spells($InputProcessor.history_left_input_string)

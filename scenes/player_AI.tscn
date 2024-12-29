@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://de66i5jdl7vgu" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f2.png" id="4_15eaj"]
 [ext_resource type="Texture2D" uid="uid://bb1dtxi6iufqr" path="res://0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f3.png" id="5_hw0uk"]
 [ext_resource type="Script" path="res://scripts/target.gd" id="7_3umt1"]
-[ext_resource type="Script" path="res://scripts/health_bar.gd" id="7_b72xi"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="7_et5p8"]
 [ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="8_p2yia"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
@@ -47,23 +47,50 @@ position = Vector2(-1.90735e-06, 16)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_3yp56")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="Health" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("7_et5p8")
+
+[node name="HealthText" type="Label" parent="Health"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0/0"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="Health"]
+layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -49.0
-offset_top = 50.0
+offset_top = 10.0
 offset_right = 49.0
-offset_bottom = 60.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("8_p2yia")
 max_value = 14.0
 step = 1.0
-value = 7.0
+value = 13.0
 show_percentage = false
-script = ExtResource("7_b72xi")
 
 [node name="Target" type="Panel" parent="."]
 clip_children = 1

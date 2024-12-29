@@ -1,6 +1,6 @@
 extends Player
+@onready var Health: Control = $Health
 
-@onready var health_bar: ProgressBar = $HealthBar
 signal player_turn_end
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	
 
 func update_health_bar():
-	health_bar.update_health_bar(max_health,health)
+	Health.update_health_bar(max_health,health)
 
 func turn_end():
 	player_turn_end.emit()

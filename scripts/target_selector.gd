@@ -10,6 +10,8 @@ func spell_effect():
 	if _target.size()==0:
 		Events.effect_end.emit()
 		return
+	# 让法术生效到目标上
 	_spell.apply_effect(_target)
+	
 	_target.clear()
 	Events.effect_end.emit()

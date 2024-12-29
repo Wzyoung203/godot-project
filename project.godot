@@ -25,7 +25,7 @@ STree="*res://global/spell_tree.gd"
 window/size/viewport_width=720
 window/size/viewport_height=480
 window/stretch/mode="canvas_items"
-mouse_cursor/custom_image="res://cursor/PNG/Basic/Default/pointer_c.png"
+mouse_cursor/custom_image="res://cursor/PNG/Basic/Default/pointer_c_shaded.png"
 
 [editor_plugins]
 

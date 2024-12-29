@@ -30,9 +30,11 @@ func update_health_bar():
 	pass
 
 func _area_exited():
-	var cursor = load("res://cursor/PNG/Basic/Default/pointer_c.png")
+	var cursor = load("res://cursor/PNG/Basic/Default/cursor_none.png")
 	Input.set_custom_mouse_cursor(cursor)
-
+func _area_entered():
+	var cursor = load("res://cursor/PNG/Basic/Default/target_round_b.png")
+	Input.set_custom_mouse_cursor(cursor)
 func _area_selected(event: InputEvent):
 	var cursor = load("res://cursor/PNG/Basic/Default/target_round_b.png")
 	Input.set_custom_mouse_cursor(cursor)
