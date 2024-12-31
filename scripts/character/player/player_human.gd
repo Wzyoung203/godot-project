@@ -6,11 +6,6 @@ class_name PlayerHuman
 func _ready() -> void:
 	super._ready()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-
 func update_health_bar():
 	Health.update_health_bar(max_health,health)
 	

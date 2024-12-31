@@ -24,7 +24,7 @@ func add_child(child: SpellNode):
 
 func get_child(char: String) -> SpellNode:
 	for child in _children:
-		if char == child.get_value():
+		if char == child.get_value() || char == child.get_value().to_upper():
 			return child
 	return null
 

@@ -10,10 +10,14 @@ func _ready() -> void:
 	
 	Events.input_process_success.connect(enquiry_vaild_spell)
 
+ #TODO..
 func enquiry_vaild_spell():
-	print("Which Spell do you want to use?")
+	#print("Which Spell do you want to use?")
 	left_vaild_spells = spell_tree.search_valid_spells($InputProcessor.history_left_input_string)
-	display_vaild_spell(left_vaild_spells)
+	if left_vaild_spells.size() != 0:
+		display_vaild_spell(left_vaild_spells)
+	else: 
+		Events.no_valid_spell.emit()
 	right_vaild_spells = spell_tree.search_valid_spells($InputProcessor.history_right_input_string)
 	#TODO.. 
 	# display_vaild_spell(right_vaild_spells)

@@ -14,9 +14,11 @@ func creat_spell_tree():
 	add_spell("p",Sheild.new(),root)
 
 	add_spell("sd",Missile.new(),root)
-	
-	
-	
+	add_spell("pwpfsssd",FingerOfDeath.new(),root)
+	add_spell("dffdd",LightningBolt.new(),root)
+	add_spell("wfp",CauseLightWound.new(),root)
+	add_spell("wpfd",CauseHeavyWound.new(),root)
+	add_spell("fssdd",FireBall.new(),root)
 	
 	add_spell("pfs",Sheild.new(),root)
 	add_spell("sppp",Sheild.new(),root)
@@ -69,33 +71,28 @@ func print_spells():
 	print(spells)	
 
 # 根据已有的法术树，搜索输入序列：是法术返回该法术，不是则返回空
-func search(sequence: String) -> Spell:
-	var currentNode = root
-	for char in sequence:
-		if currentNode.get_child(char):		currentNode = currentNode.get_child(char)
-		else:	 
-				#print("Sesarch failed: The seq is not in tree")
-				return null
-	if currentNode.get_is_spell():
-		#print("Sesarch success")
-		return currentNode.get_spell()
+func search(sequence: String, currentNode: SpellNode) -> Spell:
+	var char = sequence[0]
+	if currentNode.get_child(char):
+		currentNode = currentNode.get_child(char)
 	else:
-		#print("Sesarch failed: The seq is not a spell")
-		return null	
+		return null
+	if len(sequence)==1:
+		if currentNode.get_is_spell():
+			return currentNode.get_spell()
+		else:
+			return null
+	else:	 
+		#print("Sesarch failed: The seq is not in tree")
+		return search(sequence.substr(1),currentNode)
 
 # 根据输入历史查找可使用的法术
 func search_valid_spells(sequence: String) -> Array[Spell]:
 	var valid_spells: Array[Spell] = []
 	while sequence.length() > 0:
 		# 按大写（双手手势）搜索
-		if search(sequence):
-			valid_spells.append(search(sequence))
-		# 按小写（单手手势）搜索
-		if sequence[0] != sequence[0].to_lower():
-			sequence[0] = sequence[0].to_lower()
-			if search(sequence):
-				valid_spells.append(search(sequence))
-			
+		if search(sequence,root):
+			valid_spells.append(search(sequence,root))
 		sequence = sequence.substr(1)
 	#if valid_spells.size() > 0:
 		#print("找到了法术！")

@@ -17,7 +17,6 @@ signal input_process_success
 
 # 发送即将释放的法术信号
 signal selected_spell(spell:Spell)
-
 # 选中目标信号
 signal selected_target(character: Character)
 
@@ -25,3 +24,6 @@ signal selected_target(character: Character)
 signal select_end
 # 法术生效结束信号
 signal effect_end
+
+# 本回合无可用法术信号
+signal no_valid_spell

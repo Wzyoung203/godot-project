@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctrun428jgbqh"
+path="res://.godot/imported/Clement Panchout _ 80s Zombies Movie _ 2018.wav-d881a7926a0f5b2d06523ad542a73091.sample"
+
+[deps]
+
+source_file="res://adon/Clement Panchout _ 80s Zombies Movie _ 2018.wav"
+dest_files=["res://.godot/imported/Clement Panchout _ 80s Zombies Movie _ 2018.wav-d881a7926a0f5b2d06523ad542a73091.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
