@@ -4,6 +4,8 @@ class_name SpellTree
 var root: SpellNode
 var spells: Array
 
+var spellList: Array[Spell]
+
 func _init():
 	self.creat_spell_tree()
 	self.preload_trie()
@@ -20,10 +22,16 @@ func creat_spell_tree():
 	add_spell("wpfd",CauseHeavyWound.new(),root)
 	add_spell("fssdd",FireBall.new(),root)
 	
+	add_spell("sfw",SummonGoblin.new(),root)
+	
 	add_spell("pfs",Sheild.new(),root)
 	add_spell("sppp",Sheild.new(),root)
 	add_spell("fs",Sheild.new(),root)
 	add_spell("s",Missile.new(),root)
+	add_spell("pfsf",Sheild.new(),root)
+	add_spell("spppf",Sheild.new(),root)
+	add_spell("fsf",Sheild.new(),root)
+	add_spell("sff",Missile.new(),root)
 	
 	
 	
@@ -65,10 +73,12 @@ func preload_trie(node: SpellNode = root, prefix: String = "") -> void:
 		preload_trie(child, prefix + child._value)
 	if node._isSpell:
 		spells.append(prefix)
+		var spell = node.get_spell()
+		spellList.append(spell)
 
 func print_spells():
 	print("法术数据库加载完成:")
-	print(spells)	
+	print(spells)
 
 # 根据已有的法术树，搜索输入序列：是法术返回该法术，不是则返回空
 func search(sequence: String, currentNode: SpellNode) -> Spell:

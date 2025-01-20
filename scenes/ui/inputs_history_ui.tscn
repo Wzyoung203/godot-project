@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1rim54bbmrtk"]
+
+[ext_resource type="Script" path="res://scripts/inputs_history_ui.gd" id="1_40jei"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwxk8"]
+bg_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="Theme" id="Theme_bu744"]
+Panel/styles/panel = SubResource("StyleBoxFlat_hwxk8")
+
+[node name="Panel" type="Panel"]
+offset_left = 63.0
+offset_top = 55.0
+offset_right = 623.0
+offset_bottom = 367.0
+theme = SubResource("Theme_bu744")
+script = ExtResource("1_40jei")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+text = "history inputs"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "X"
+flat = true
+
+[node name="PlayerInputs" type="ItemList" parent="."]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 281.0
+offset_bottom = 312.0
+item_count = 2
+max_columns = 2
+same_column_width = true
+fixed_column_width = 122
+item_0/text = "P1 L"
+item_0/selectable = false
+item_1/text = "P1 R"
+item_1/selectable = false
+
+[node name="AIInputs" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 23.0
+offset_right = 560.0
+offset_bottom = 313.0
+item_count = 2
+max_columns = 2
+same_column_width = true
+fixed_column_width = 122
+item_0/text = "P2 L"
+item_0/selectable = false
+item_1/text = "P2 R"
+item_1/selectable = false
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

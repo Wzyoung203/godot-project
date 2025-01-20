@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scripts/input_processor.gd" id="9_byq1v"]
 [ext_resource type="Script" path="res://scripts/input_manager.gd" id="9_mx3tl"]
 [ext_resource type="Theme" uid="uid://bipjgp54b8cyn" path="res://scenes/buttons_theme.tres" id="10_asgvc"]
-[ext_resource type="PackedScene" uid="uid://es2g4x8qgqpd" path="res://scenes/spell_ui.tscn" id="11_nu8mi"]
+[ext_resource type="PackedScene" uid="uid://es2g4x8qgqpd" path="res://scenes/ui/spell_ui.tscn" id="11_nu8mi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
 animations = [{
