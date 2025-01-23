@@ -1,6 +1,7 @@
 extends VBoxContainer
 @onready var menu = $ItemList
 @onready var confirm = $HBoxContainer/Confirm
+var selected:int
 func display(spells: Array[Spell]) -> void:
 	visible = true
 	menu.visible = true
@@ -21,13 +22,14 @@ func _cancel():
 	Events.effect_end.emit()
 
 func _activate_confirm_btn(index: int):
+	selected = index
 	confirm.disabled = false
 	
 func _confirm():
-	var spell:Spell = menu.get_item_metadata(0) as Spell
+	var spell:Spell = menu.get_item_metadata(selected) as Spell
 	print("已选中法术：",spell.getName())
 	confirm.disabled = true
 	menu.clear()
 	visible = false
+	spell.set_caster(self.get_parent().get_parent())
 	Events.selected_spell.emit(spell)
-	

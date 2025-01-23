@@ -2,6 +2,7 @@ extends Node2D
 class_name selector
 
 var _spell: Spell
+var _caster: Character
 var _target: Array[Character] = []
 
 # 判断施法对象是否合法

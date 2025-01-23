@@ -31,6 +31,11 @@ mouse_cursor/custom_image="res://adon/cursor/PNG/Basic/Default/pointer_c_shaded.
 
 enabled=PackedStringArray()
 
+[global_group]
+
+ai=""
+player=""
+
 [gui]
 
 theme/custom_font="res://adon/fonts/Xolonium-Regular.ttf"

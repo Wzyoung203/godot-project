@@ -1,34 +1,34 @@
 [gd_scene load_steps=17 format=3 uid="uid://bewwldnwj4pbg"]
 
-[ext_resource type="Script" path="res://scripts/character/player/player_human.gd" id="1_ktp6b"]
-[ext_resource type="Texture2D" uid="uid://bqgtun3vps2up" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f0.png" id="1_sk13t"]
-[ext_resource type="Texture2D" uid="uid://cphwrktkinq8m" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f1.png" id="2_lbdfc"]
-[ext_resource type="Texture2D" uid="uid://cdehr6fxl2xaf" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f2.png" id="3_rakjk"]
-[ext_resource type="Texture2D" uid="uid://b40l1hxqp0qqb" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f3.png" id="4_inn20"]
-[ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="6_1xkvo"]
-[ext_resource type="Script" path="res://scripts/target.gd" id="6_r5qq1"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="7_75jnc"]
-[ext_resource type="FontFile" uid="uid://wq6bhg757pv0" path="res://adon/fonts/Xolonium-Regular.ttf" id="7_nc7r3"]
-[ext_resource type="PackedScene" uid="uid://b4d6lgk4hf6x4" path="res://scenes/spell_manager.tscn" id="8_m0edq"]
-[ext_resource type="Script" path="res://scripts/input_processor.gd" id="9_byq1v"]
-[ext_resource type="Script" path="res://scripts/input_manager.gd" id="9_mx3tl"]
-[ext_resource type="Theme" uid="uid://bipjgp54b8cyn" path="res://scenes/buttons_theme.tres" id="10_asgvc"]
-[ext_resource type="PackedScene" uid="uid://es2g4x8qgqpd" path="res://scenes/ui/spell_ui.tscn" id="11_nu8mi"]
+[ext_resource type="Script" path="res://scripts/character/player/player_human.gd" id="1_k8kkq"]
+[ext_resource type="Texture2D" uid="uid://bqgtun3vps2up" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f0.png" id="2_bgjsn"]
+[ext_resource type="Texture2D" uid="uid://cphwrktkinq8m" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f1.png" id="3_8cuov"]
+[ext_resource type="Texture2D" uid="uid://cdehr6fxl2xaf" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f2.png" id="4_3v2hb"]
+[ext_resource type="Texture2D" uid="uid://b40l1hxqp0qqb" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_f_idle_anim_f3.png" id="5_aj5ll"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="6_d7ndt"]
+[ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="7_ldg8j"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="8_hvmke"]
+[ext_resource type="Theme" uid="uid://bipjgp54b8cyn" path="res://scenes/buttons_theme.tres" id="9_4onto"]
+[ext_resource type="FontFile" uid="uid://wq6bhg757pv0" path="res://adon/fonts/Xolonium-Regular.ttf" id="10_skcpc"]
+[ext_resource type="PackedScene" uid="uid://b4d6lgk4hf6x4" path="res://scenes/spell_manager.tscn" id="11_46un0"]
+[ext_resource type="Script" path="res://scripts/input_processor.gd" id="12_t6cnj"]
+[ext_resource type="PackedScene" uid="uid://es2g4x8qgqpd" path="res://scenes/ui/spell_ui.tscn" id="13_gxqwt"]
+[ext_resource type="Script" path="res://scripts/target.gd" id="14_pgc0k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_sk13t")
+"texture": ExtResource("2_bgjsn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_lbdfc")
+"texture": ExtResource("3_8cuov")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_rakjk")
+"texture": ExtResource("4_3v2hb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_inn20")
+"texture": ExtResource("5_aj5ll")
 }],
 "loop": true,
 "name": &"idle",
@@ -39,7 +39,7 @@ animations = [{
 size = Vector2(56, 67)
 
 [node name="Player_human" type="Area2D"]
-script = ExtResource("1_ktp6b")
+script = ExtResource("1_k8kkq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -60,7 +60,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-script = ExtResource("7_75jnc")
+script = ExtResource("6_d7ndt")
 
 [node name="HealthText" type="Label" parent="Health"]
 layout_mode = 1
@@ -90,7 +90,7 @@ offset_right = 49.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("6_1xkvo")
+theme = ExtResource("7_ldg8j")
 max_value = 14.0
 step = 1.0
 value = 13.0
@@ -101,7 +101,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("9_mx3tl")
+script = ExtResource("8_hvmke")
 
 [node name="LeftHand" type="OptionButton" parent="InputManager"]
 layout_mode = 0
@@ -109,8 +109,8 @@ offset_left = -80.0
 offset_top = -64.0
 offset_right = -11.0
 offset_bottom = -33.0
-theme = ExtResource("10_asgvc")
-theme_override_fonts/font = ExtResource("7_nc7r3")
+theme = ExtResource("9_4onto")
+theme_override_fonts/font = ExtResource("10_skcpc")
 keep_pressed_outside = true
 selected = 1
 item_count = 7
@@ -134,8 +134,8 @@ offset_left = 16.0
 offset_top = -64.0
 offset_right = 85.0
 offset_bottom = -36.0
-theme = ExtResource("10_asgvc")
-theme_override_fonts/font = ExtResource("7_nc7r3")
+theme = ExtResource("9_4onto")
+theme_override_fonts/font = ExtResource("10_skcpc")
 selected = 1
 item_count = 7
 popup/item_0/text = "f"
@@ -161,20 +161,20 @@ offset_right = 57.0
 offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("10_asgvc")
-theme_override_fonts/font = ExtResource("7_nc7r3")
+theme = ExtResource("9_4onto")
+theme_override_fonts/font = ExtResource("10_skcpc")
 theme_override_font_sizes/font_size = 20
 text = "End Turn"
 
-[node name="SpellManager" parent="." instance=ExtResource("8_m0edq")]
+[node name="SpellManager" parent="." instance=ExtResource("11_46un0")]
 
 [node name="InputProcessor" type="Node2D" parent="SpellManager"]
-script = ExtResource("9_byq1v")
+script = ExtResource("12_t6cnj")
 
 [node name="SpellSelector" type="Node2D" parent="SpellManager"]
 
-[node name="SpellUI" parent="SpellManager" instance=ExtResource("11_nu8mi")]
-theme = ExtResource("10_asgvc")
+[node name="SpellUI" parent="SpellManager" instance=ExtResource("13_gxqwt")]
+theme = ExtResource("9_4onto")
 
 [node name="Target" type="Panel" parent="."]
 clip_children = 1
@@ -182,7 +182,7 @@ offset_left = -37.0
 offset_top = -28.0
 offset_right = 35.0
 offset_bottom = 47.0
-script = ExtResource("6_r5qq1")
+script = ExtResource("14_pgc0k")
 
 [connection signal="end_turn" from="InputManager" to="." method="turn_end"]
 [connection signal="pressed" from="InputManager/EndTurnButton" to="InputManager" method="_on_end_turn_button_pressed"]

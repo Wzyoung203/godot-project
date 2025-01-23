@@ -7,7 +7,7 @@ func _init(name: String, sequences: String, effect: String):
 	super(name, sequences, effect)
 
 func apply_effect(Targets: Array = []):
-	return creat_creature()
+	return creat_creature(caster)
 
-func creat_creature():
+func creat_creature(caster:Character):
 	pass

@@ -23,15 +23,19 @@ func creat_spell_tree():
 	add_spell("fssdd",FireBall.new(),root)
 	
 	add_spell("sfw",SummonGoblin.new(),root)
-	
-	add_spell("pfs",Sheild.new(),root)
-	add_spell("sppp",Sheild.new(),root)
-	add_spell("fs",Sheild.new(),root)
-	add_spell("s",Missile.new(),root)
-	add_spell("pfsf",Sheild.new(),root)
-	add_spell("spppf",Sheild.new(),root)
-	add_spell("fsf",Sheild.new(),root)
-	add_spell("sff",Missile.new(),root)
+	add_spell("psfw",SummonOgre.new(),root)
+	add_spell("fpsfw",SummonTroll.new(),root)
+	add_spell("wfpsfw",SummonGaint.new(),root)
+
+	#
+	#add_spell("w",SummonGoblin.new(),root)
+	#add_spell("sppp",Sheild.new(),root)
+	#add_spell("fs",Sheild.new(),root)
+	#add_spell("s",Missile.new(),root)
+	#add_spell("pfsf",Sheild.new(),root)
+	#add_spell("spppf",Sheild.new(),root)
+	#add_spell("fsf",Sheild.new(),root)
+	#add_spell("sff",Missile.new(),root)
 	
 	
 	
