@@ -10,8 +10,13 @@ func _is_leggal() -> bool:
 	return true
 
 func _set_spell(spell:Spell):
-	_spell = spell
+	if _spell==null:
+		_spell = spell
+
+func _set_target(target: Array[Character]):
+	_target = target
 
 func _add_target(target:Character):
-	_target.append(target)
+	if _target.size() == 0:
+		_target.append(target)
 	

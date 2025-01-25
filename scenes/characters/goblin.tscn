@@ -1660,7 +1660,7 @@ metadata/_edit_use_anchors_ = true
 [node name="HealthBar" type="ProgressBar" parent="Health"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.625
+anchor_left = 0.525
 anchor_top = 1.0
 anchor_right = 0.525
 anchor_bottom = 1.0

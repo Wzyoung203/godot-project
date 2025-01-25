@@ -12,6 +12,7 @@ var history_right_input_string: String
 func _ready() -> void:
 	Events.spells_on_hands.connect(_process_input)
 
+
 func _process_input(left_gesture: String, right_gesture: String) -> void:
 	_left_input = left_gesture
 	_right_input = right_gesture

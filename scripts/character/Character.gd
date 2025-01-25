@@ -45,4 +45,3 @@ func _area_selected(event: InputEvent):
 func _selected_target():
 	print("选择角色：",self)
 	Events.selected_target.emit(self)
-	Events.select_end.emit()

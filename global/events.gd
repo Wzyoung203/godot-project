@@ -19,6 +19,8 @@ signal input_process_success
 signal selected_spell(spell:Spell)
 # 选中目标信号
 signal selected_target(character: Character)
+# 左手法术选择完毕
+signal left_selected
 
 # 选中法术或对象阶段结束信号
 signal select_end
@@ -27,3 +29,6 @@ signal effect_end
 
 # 本回合无可用法术信号
 signal no_valid_spell
+
+# 法术事件创建成功
+signal event_creat_success
