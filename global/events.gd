@@ -32,3 +32,6 @@ signal no_valid_spell
 
 # 法术事件创建成功
 signal event_creat_success
+
+# 一般事件信息
+signal normal_event(message: String)

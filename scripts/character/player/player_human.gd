@@ -6,6 +6,7 @@ class_name PlayerHuman
 func _ready() -> void:
 	add_to_group("player")
 	super._ready()
+	nameID += "_human"
 
 func update_health_bar():
 	Health.update_health_bar(max_health,health)

@@ -27,7 +27,7 @@ func _process_input(left_gesture: String, right_gesture: String) -> void:
 	
 	history_left_input_string = _Array_to_String(_history_left_input)
 	history_right_input_string = _Array_to_String(_history_right_input)
-	print("History left inputs: ",history_left_input_string)
+	#print("History left inputs: ",history_left_input_string)
 	Events.input_process_success.emit()
 	#print("History right inputs: ",history_right_input_string)
 

@@ -16,6 +16,7 @@ func _ready() -> void:
 func create_new_spell_event(spell:Spell):
 	currentSpellEvent = SpellEvent.new()
 	currentSpellEvent._set_spell(spell)
+	currentSpellEvent.set_caster(player_generator.player_1)
 
 func add_target_to_spell_event(character: Character):
 	currentSpellEvent._add_target(character)
@@ -29,6 +30,7 @@ func spell_effect():
 	for spellEvent in spellEvents:
 		var _spell = spellEvent._spell
 		var _target = spellEvent._target
+		#print(_spell,"  ",_target)
 		player1 = player_generator.player_1
 		player2 = player_generator.player_2
 		if _target.size()==0:
@@ -39,6 +41,5 @@ func spell_effect():
 		if _spell is SummonSpell:
 			if (_spell.caster == player1):
 				$SummonGenerator.place_creature(_spell.creature)
-				print(_spell.creature)
-		_target.clear()
-		Events.effect_end.emit()
+	Events.effect_end.emit()
+	spellEvents.clear()

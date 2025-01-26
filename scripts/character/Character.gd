@@ -3,6 +3,7 @@ class_name Character
 
 var health: int  
 var max_health: int  
+var nameID: String
 
 func _ready():
 	health = max_health
@@ -43,5 +44,5 @@ func _area_selected(event: InputEvent):
 
 
 func _selected_target():
-	print("选择角色：",self)
+	#print("选择角色：",self)
 	Events.selected_target.emit(self)

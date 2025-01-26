@@ -5,6 +5,9 @@ var _spell: Spell
 var _caster: Character
 var _target: Array[Character] = []
 
+func set_caster(caster:Character):
+	_caster=caster
+
 # 判断施法对象是否合法
 func _is_leggal() -> bool:
 	return true

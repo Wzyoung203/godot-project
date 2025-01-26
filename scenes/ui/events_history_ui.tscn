@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ovjy1s8n6d5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwxk8"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Theme" id="Theme_6mp8b"]
+Panel/styles/panel = SubResource("StyleBoxFlat_hwxk8")
+
+[node name="Panel" type="Panel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme = SubResource("Theme_6mp8b")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 68.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+
+[node name="BoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
