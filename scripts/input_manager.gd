@@ -29,6 +29,10 @@ func _on_end_turn_button_pressed() -> void:
 	
 	left_gesture = $LeftHand.get_item_text($LeftHand.get_selected_id())
 	right_gesture = $RightHand.get_item_text($RightHand.get_selected_id())
+	if left_gesture == "stab":
+		left_gesture = "o"
+	if right_gesture == "stab":
+		right_gesture = "o"
 	if left_gesture == right_gesture:
 		left_gesture=left_gesture.to_upper()
 		right_gesture=right_gesture.to_upper()

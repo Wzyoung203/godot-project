@@ -6,5 +6,5 @@ var damage = 3
 
 func apply_effect(Targets: Array[Character] = []):
 	for target in Targets:
-		target.take_damage(target.health)
+		target.take_damage(damage)
 	

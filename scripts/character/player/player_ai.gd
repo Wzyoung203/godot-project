@@ -1,4 +1,5 @@
 extends Player
+class_name PlayerAI
 @onready var Health: Control = $Health
 
 signal player_turn_end
@@ -21,3 +22,6 @@ func turn_end():
 	
 func flip():
 	$AnimatedSprite2D.flip_h = true	
+
+func set_targets(charaters:Array[Character]):
+	$BehaviourController.set_tagets(charaters)

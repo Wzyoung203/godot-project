@@ -35,3 +35,9 @@ signal event_creat_success
 
 # 一般事件信息
 signal normal_event(message: String)
+
+# ai操作信号
+# ai本回合输入信号
+signal ai_gestures(lefthand:String,rightHand:String)
+# 生物列表变动（目前仅用于更新ai的目标队列）
+signal creature_changed(creatures:Array[Character])

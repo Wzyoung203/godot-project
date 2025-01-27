@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfqy86fd8jdm1"]
+[gd_scene load_steps=12 format=3 uid="uid://cfqy86fd8jdm1"]
 
 [ext_resource type="Script" path="res://scripts/character/player/player_ai.gd" id="1_vds8f"]
 [ext_resource type="Texture2D" uid="uid://h84vl22w3tfl" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_idle_anim_f0.png" id="2_1yexn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/target.gd" id="7_3umt1"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="7_et5p8"]
 [ext_resource type="Theme" uid="uid://dkw77ihbnun07" path="res://health_bar_theme.tres" id="8_p2yia"]
+[ext_resource type="Script" path="res://scripts/behaviour_controller.gd" id="9_vhxht"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3lr4"]
 animations = [{
@@ -99,6 +100,18 @@ offset_top = -28.0
 offset_right = 35.0
 offset_bottom = 47.0
 script = ExtResource("7_3umt1")
+
+[node name="BehaviourController" type="Node2D" parent="."]
+script = ExtResource("9_vhxht")
+
+[node name="InputHistory" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -171.0
+offset_right = -79.0
+offset_bottom = -145.0
+horizontal_alignment = 3
+justification_flags = 131
+max_lines_visible = 5
 
 [connection signal="gui_input" from="Target" to="." method="_area_selected"]
 [connection signal="mouse_exited" from="Target" to="." method="_area_exited"]
