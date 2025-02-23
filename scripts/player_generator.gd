@@ -5,14 +5,7 @@ extends Node
 @onready var character_manager: Node2D = $"../CharacterManager"
 var player_1:PlayerHuman
 var player_2:PlayerAI
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Events.creature_changed.connect(ai_target_modify)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func start():
 	var PLAYER_HUMAN = preload("res://scenes/characters/player_human.tscn")
@@ -28,6 +21,5 @@ func start():
 	
 	character_manager.add_creature(player_1)
 	character_manager.add_creature(player_2)
-
-func ai_target_modify(creatures:Array[Character]):
-	player_2.set_targets(creatures)
+	
+	$"../TurnManager".start_player_turn()

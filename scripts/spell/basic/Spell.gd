@@ -3,14 +3,14 @@ class_name Spell
 var name: String
 var sequences: String
 var effect: String
-var caster: Character
+var caster: Role
 
 func _init(name: String, sequences: String, effect: String):
 	self.name = name
 	self.sequences = sequences
 	self.effect = effect
 
-func set_caster(caster:Character):
+func set_caster(caster:Role):
 	self.caster = caster
 
 # 返回法术的基本信息

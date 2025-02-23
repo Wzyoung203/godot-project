@@ -1,12 +1,12 @@
 extends Player
 class_name PlayerAI
 @onready var Health: Control = $Health
-
 signal player_turn_end
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	nameID += "_ai"
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 
 func update_health_bar():
 	Health.update_health_bar(max_health,health)
+	Game_Status.set_p2_hp(health)
 
 func turn_end():
 	player_turn_end.emit()
@@ -22,6 +23,3 @@ func turn_end():
 	
 func flip():
 	$AnimatedSprite2D.flip_h = true	
-
-func set_targets(charaters:Array[Character]):
-	$BehaviourController.set_tagets(charaters)

@@ -194,6 +194,7 @@ justification_flags = 131
 max_lines_visible = 5
 
 [node name="InputHistory" type="Label" parent="InputHistory"]
+layout_mode = 0
 offset_left = -80.0
 offset_top = -171.0
 offset_right = -79.0

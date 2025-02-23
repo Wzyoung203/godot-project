@@ -1,6 +1,6 @@
 extends Node2D
-var creatures:Array[Character]
+var creatures:Array[Role]
 
-func add_creature(character:Character):
+func add_creature(character:Role):
 	creatures.append(character)
 	Events.creature_changed.emit(creatures)

@@ -1,9 +1,9 @@
-extends Character
+extends Role
 class_name Summon
 
 var _is_dead:bool
-var _controller:Character
-var _attack_target: Character
+var _controller:Role
+var _attack_target: Role
 var _damage
 func _ready() -> void:
 	super._ready()
@@ -14,11 +14,11 @@ func die():
 	_is_dead = true 
 	print("Summon has died.")
 
-func set_controller(charcter:Character):
+func set_controller(charcter:Role):
 	_controller = charcter
 	print(_controller)
 
-func set_attack_target(target:Character):
+func set_attack_target(target:Role):
 	_attack_target = target
 
 func cause_damage():

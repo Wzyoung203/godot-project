@@ -1,4 +1,4 @@
-extends Character
+extends Role
 class_name Player
 
 func _ready() -> void:

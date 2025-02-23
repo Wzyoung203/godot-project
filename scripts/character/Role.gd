@@ -1,5 +1,5 @@
 extends Area2D
-class_name Character
+class_name Role
 
 var health: int  
 var max_health: int  
@@ -25,7 +25,7 @@ func heal(amount: int):
 	
 
 func die():
-	print("Character has died.")
+	print("Role has died.")
 
 func update_health_bar():
 	pass

@@ -8,5 +8,5 @@ func _ready() -> void:
 
 func start_monitoring_events(spell:Spell):
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
-func stop_monitoring_events(charcter:Character):
+func stop_monitoring_events(charcter:Role):
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE

@@ -113,3 +113,10 @@ func search_valid_spells(sequence: String) -> Array[Spell]:
 		#for spell in valid_spells:
 			#print(spell.getName())
 	return valid_spells
+
+# 根据特定序列查找法术
+func search_in_spell_list(sequence: String) -> Spell:
+	for spell in spellList:
+		if spell.sequences == sequence:
+			return spell
+	return null		

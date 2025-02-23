@@ -13,12 +13,29 @@ func _ready() -> void:
 	
 	Events.spell_effect.connect(spell_effect)
 	
+	Events.ai_cur_spells_targets.connect(create_ai_spell_event)
+	
 func create_new_spell_event(spell:Spell):
 	currentSpellEvent = SpellEvent.new()
 	currentSpellEvent._set_spell(spell)
 	currentSpellEvent.set_caster(player_generator.player_1)
-
-func add_target_to_spell_event(character: Character):
+func create_ai_spell_event(spells:Array[Spell],targets:Array[Role]):
+	
+	if spells.size() != targets.size():
+		print("ERROR: spell and targets doesn't match.")
+		return
+	if spells.size() == 0:
+		Events.ai_events_created.emit()
+		return
+	for i in spells.size():
+		var event:SpellEvent = SpellEvent.new()
+		event.set_caster(player_generator.player_2)
+		event._set_spell(spells[i])
+		event._add_target(targets[i])
+		spellEvents.append(event)
+	Events.ai_events_created.emit()
+	
+func add_target_to_spell_event(character: Role):
 	currentSpellEvent._add_target(character)
 	spellEvents.append(currentSpellEvent)
 	Events.event_creat_success.emit()

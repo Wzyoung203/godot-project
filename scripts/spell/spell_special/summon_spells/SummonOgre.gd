@@ -10,6 +10,6 @@ func apply_effect(Targets: Array = []):
 	super(Targets)
 	creature.set_attack_target(Targets[0])
 
-func creat_creature(caster:Character):
+func creat_creature(caster:Role):
 	creature = creature_scene.instantiate()
 	creature.set_controller(caster)

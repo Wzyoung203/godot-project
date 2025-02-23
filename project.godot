@@ -12,13 +12,14 @@ config_version=5
 
 config/name="myProject"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Events="*res://global/events.gd"
 STree="*res://global/spell_tree.gd"
+Game_Status="*res://global/game_status.gd"
 
 [display]
 
@@ -27,9 +28,13 @@ window/size/viewport_height=480
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://adon/cursor/PNG/Basic/Default/pointer_c_shaded.png"
 
+[dotnet]
+
+project/assembly_name="myProject"
+
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("Dotnet")
 
 [global_group]
 

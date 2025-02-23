@@ -5,7 +5,7 @@ func _init():
 
 var damage = 5
 
-func apply_effect(Targets: Array[Character] = []):
+func apply_effect(Targets: Array[Role] = []):
 	for target in Targets:
 		target.take_damage(damage)
 	

@@ -18,7 +18,7 @@ signal input_process_success
 # 发送即将释放的法术信号
 signal selected_spell(spell:Spell)
 # 选中目标信号
-signal selected_target(character: Character)
+signal selected_target(character: Role)
 # 左手法术选择完毕
 signal left_selected
 
@@ -40,4 +40,10 @@ signal normal_event(message: String)
 # ai本回合输入信号
 signal ai_gestures(lefthand:String,rightHand:String)
 # 生物列表变动（目前仅用于更新ai的目标队列）
-signal creature_changed(creatures:Array[Character])
+signal creature_changed(creatures:Array[Role])
+# 本回合ai使用的法术及目标
+signal ai_cur_spells_targets(spells:Array[Spell],targets:Array[Role])
+# ai行为结束信号
+signal ai_behaviour_finished
+# ai事件建立信号
+signal ai_events_created
