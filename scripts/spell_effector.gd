@@ -15,6 +15,8 @@ func _ready() -> void:
 	
 	Events.ai_cur_spells_targets.connect(create_ai_spell_event)
 	
+	Events.player_turn_end.connect(remove_enhancements)
+	
 func create_new_spell_event(spell:Spell):
 	currentSpellEvent = SpellEvent.new()
 	currentSpellEvent._set_spell(spell)
@@ -32,12 +34,18 @@ func create_ai_spell_event(spells:Array[Spell],targets:Array[Role]):
 		event.set_caster(player_generator.player_2)
 		event._set_spell(spells[i])
 		event._add_target(targets[i])
-		spellEvents.append(event)
+		if event._spell is Sheild:
+			spellEvents.push_front(event)
+		else:
+			spellEvents.append(event)
 	Events.ai_events_created.emit()
 	
 func add_target_to_spell_event(character: Role):
 	currentSpellEvent._add_target(character)
-	spellEvents.append(currentSpellEvent)
+	if currentSpellEvent._spell is Sheild:
+		spellEvents.push_front(currentSpellEvent)
+	else:
+		spellEvents.append(currentSpellEvent)
 	Events.event_creat_success.emit()
 	
 func spell_effect():
@@ -54,10 +62,34 @@ func spell_effect():
 			Events.effect_end.emit()
 			return
 		# 让法术生效到目标上
+		if _spell is FireStorm:
+			_target = $"../CharacterManager".creatures
 		_spell.apply_effect(_target)
+		
+		if _spell is Disease:
+			if (_spell.caster == player2):
+				Game_Status.set_p1_is_disease(6)
+			else:
+				Game_Status.set_p2_is_disease(6)
+		if _spell is CureHeavyWounds:
+			if (_spell.caster == player2):
+				Game_Status.set_p2_is_disease(0)
+			else:
+				Game_Status.set_p1_is_disease(0)
 		if _spell is SummonSpell:
 			if (_spell.caster == player1):
+				_spell.creature.set_controller(player1)
 				$SummonGenerator.place_creature(_spell.creature)
+				Game_Status.add_p1_creatures_attacks(_spell.creature.get_damage())
+				character_manager.add_creature(_spell.creature)
+			if (_spell.caster == player2):
+				_spell.creature.set_controller(player2)
+				$SummonGenerator2.place_creature(_spell.creature)
+				Game_Status.set_p2_creatures_attacks(_spell.creature.get_damage())
 				character_manager.add_creature(_spell.creature)
 	Events.effect_end.emit()
 	spellEvents.clear()
+
+func remove_enhancements():
+	player_generator.player_1.hasSheild = false
+	player_generator.player_2.hasSheild = false

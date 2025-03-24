@@ -4,12 +4,15 @@ class_name GameStatus
 var _p1_left_hand: String
 var _p1_right_hand: String
 var _p1_hp: int
-var _p1_creatures_attacks: int
+var _p1_creatures_attacks: int = 0
+var _p1_is_disease: int
 
 var _p2_left_hand: String
 var _p2_right_hand: String
 var _p2_hp: int
-var _p2_creatures_attacks: int
+var _p2_creatures_attacks: int = 0
+var _p2_is_disease: int
+
 
 func _to_string() -> String:
 	var result = ""
@@ -17,11 +20,13 @@ func _to_string() -> String:
 	result += "Right Hand: " + _p1_right_hand + "\n"
 	result += "HP: " + str(_p1_hp) + "\n"
 	result += "Creatures Attacks: " + str(_p1_creatures_attacks) + "\n"
+	result += "Is Disease: " + str(_p1_is_disease) + "\n"
 
 	result += "Left Hand: " + _p2_left_hand + "\n"
 	result += "Right Hand: " + _p2_right_hand + "\n"
 	result += "HP: " + str(_p2_hp) + "\n"
 	result += "Creatures Attacks: " + str(_p2_creatures_attacks) + "\n"
+	result += "Is Disease: " + str(_p2_is_disease) + "\n"
 
 	return result
 
@@ -49,7 +54,14 @@ func get_p1_creatures_attacks() -> int:
 
 func set_p1_creatures_attacks(value: int) -> void:
 	_p1_creatures_attacks = value
+	
+func add_p1_creatures_attacks(value: int) -> void:
+	_p1_creatures_attacks += value
 
+
+func set_p1_is_disease(value: int) -> void:
+	_p1_is_disease = value
+	
 # Player 2
 func get_p2_left_hand() -> String:
 	return _p2_left_hand
@@ -74,3 +86,9 @@ func get_p2_creatures_attacks() -> int:
 
 func set_p2_creatures_attacks(value: int) -> void:
 	_p2_creatures_attacks = value
+	
+func add_p2_creatures_attacks(value: int) -> void:
+	_p2_creatures_attacks += value
+	
+func set_p2_is_disease(value: int) -> void:
+	_p2_is_disease = value

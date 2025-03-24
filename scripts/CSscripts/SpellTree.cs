@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class SpellTree : Node
 {
@@ -18,17 +19,32 @@ public partial class SpellTree : Node
     // 创建法术树
     private void CreateSpellTree()
     {
-        AddSpell("p", new Spell("p", 5), root);
-        AddSpell("sd", new Spell("sd", 10), root);
-        AddSpell("pwpfsssd", new Spell("pwpfsssd", 50), root);
-        AddSpell("dffdd", new Spell("dffdd", 30), root);
-        AddSpell("wfp", new Spell("wfp", 8), root);
-        AddSpell("wpfd", new Spell("wpfd", 12), root);
-        AddSpell("fssdd", new Spell("fssdd", 40), root);
-        AddSpell("sfw", new Spell("sfw", 15), root);
-        AddSpell("psfw", new Spell("psfw", 20), root);
-        AddSpell("fpsfw", new Spell("fpsfw", 25), root);
-        AddSpell("wfpsfw", new Spell("wfpsfw", 35), root);
+    // 基础防御法术（核心战略）
+    AddSpell("p", new Spell("p", 0), root); // 阻挡召唤物和sd
+    
+    // 直接伤害法术（按伤害效率调整）
+    AddSpell("sd", new Spell("sd", 5), root);        // 2手势/1伤害=4效率
+    AddSpell("wfp", new Spell("wfp", 10), root);     // 3手势/2伤害=5效率
+    AddSpell("wpfd", new Spell("wpfd", 15), root);   // 4手势/3伤害=4.5效率 
+    AddSpell("dffdd", new Spell("dffdd", 25), root); // 5手势/5伤害=4.4效率
+    AddSpell("fssdd", new Spell("fssdd", 25), root);  // 5手势/5伤害=4效率（因与dffdd重复稍降）
+    
+    // 召唤物法术（按预期总伤害估值）
+    AddSpell("sfw", new Spell("sfw", 25), root);     // 预期存活2回合：1x2=2
+    AddSpell("psfw", new Spell("psfw", 40), root);   // 预期2x2=4
+    AddSpell("fpsfw", new Spell("fpsfw", 50), root); // 预期3x2=6
+    AddSpell("wfpsfw", new Spell("wfpsfw", 55), root);// 预期4x2=8
+    
+    // 治疗/解状态法术
+    AddSpell("dfw", new Spell("dfw", 10), root);     // 1治疗=抵消1伤害
+    AddSpell("dfpw", new Spell("dfpw", 20), root);   // 2治疗+解疾病（战略价值高）
+    
+    // 特殊效果法术
+    AddSpell("swwc", new Spell("swwc", 20), root);   // 高风险AOE（5伤害-自伤风险）
+    AddSpell("dsfffc", new Spell("dsfffc", 60), root);// 延迟击杀（7回合=约3.5预期回合）
+    
+    // 终极法术
+    AddSpell("pwpfsssd", new Spell("pwpfsssd", 50), root); // 实际触发率极低，不宜过高
     }
 
     // 添加法术到字典树中（优化为非递归实现）
@@ -46,6 +62,79 @@ public partial class SpellTree : Node
         node.SetSpell(spell); // 设置法术
     }
 
+    public float GetProgress(string sequence)
+    {
+        Spell bestSpell = GetBestMatch(sequence);
+        if (bestSpell == null) return 0f;
+        
+        // 计算已匹配长度（取序列长度和法术长度的最小值）
+        int matchedLength = Math.Min(sequence.Length, bestSpell.Sequence.Length);
+        return (float)matchedLength / bestSpell.Sequence.Length;
+    }
+
+    public Spell GetBestMatch(string sequence)
+    {
+        if (string.IsNullOrEmpty(sequence))
+            return null;
+
+        SpellNode currentNode = root;
+        Spell bestSpell = null;
+        int maxPotentialLength = 0;
+
+        // 1. 遍历现有输入序列
+        for (int i = 0; i < sequence.Length; i++)
+        {
+            char c = sequence[i];
+            if (!currentNode.Children.TryGetValue(c, out var child))
+                break; // 路径中断，无法继续匹配
+
+            currentNode = child;
+
+            // 记录当前路径上的所有可能法术（即使未完成）
+            if (currentNode.Spell != null && currentNode.Spell.Sequence.Length > maxPotentialLength)
+            {
+                bestSpell = currentNode.Spell;
+                maxPotentialLength = bestSpell.Sequence.Length;
+            }
+        }
+
+        // 2. 寻找当前节点下可能的最长法术（即使未完成）
+        Spell potentialSpell = FindDeepestSpell(currentNode);
+        if (potentialSpell != null && potentialSpell.Sequence.Length > maxPotentialLength)
+        {
+            return potentialSpell;
+        }
+
+        return bestSpell; // 返回已匹配的最长法术
+    }
+
+    // 深度优先搜索寻找子树中最长法术
+    private Spell FindDeepestSpell(SpellNode node)
+    {
+        Spell deepestSpell = null;
+        var stack = new Stack<SpellNode>();
+        stack.Push(node);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            
+            // 更新最长法术
+            if (current.Spell != null && 
+            (deepestSpell == null || current.Spell.Sequence.Length > deepestSpell.Sequence.Length))
+            {
+                deepestSpell = current.Spell;
+            }
+            
+            // 优先探索更长的路径
+            foreach (var child in current.Children.Values.OrderByDescending(n => n.Spell?.Sequence.Length ?? 0))
+            {
+                stack.Push(child);
+            }
+        }
+        
+        return deepestSpell;
+    }
     // 遍历字典树，加载所有法术
     private void PreloadTrie()
     {
@@ -113,6 +202,8 @@ public partial class SpellTree : Node
             Console.WriteLine($"法术: {spell.Sequence}, 分数: {spell.Score}");
         }
     }
+
+
 }
 
 // Trie树的节点

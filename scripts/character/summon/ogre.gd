@@ -14,3 +14,6 @@ func _ready() -> void:
 
 func update_health_bar():
 	Health.update_health_bar(max_health,health)
+
+func flip():
+	$AnimatedSprite2D.flip_h = true

@@ -7,5 +7,6 @@ var damage = 1
 
 func apply_effect(Targets: Array[Role] = []):
 	for target in Targets:
-		target.take_damage(damage)
+		if !target.hasSheild:
+			target.take_damage(damage)
 	

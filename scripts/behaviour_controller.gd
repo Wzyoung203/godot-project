@@ -52,13 +52,7 @@ func _ai_start():
 	ai_thread = Thread.new()
 	start_time = Time.get_unix_time_from_system()	
 	ai_thread.start(_ai_thinking)
-	
-	
-	# 用minimax算法找到最佳下一步
-	#var res = ai_csharp.FindNextStep(Game_Status._to_string())
-	#var m:Move = parse_move_string(res)
-	#print(res)
-	
+
 	
 func parse_move_string(move_string: String) -> Move:
 	# 将输入字符串按行分割
@@ -91,69 +85,19 @@ func _ai_thinking():
 	_cur_input_right = m.get_right_hand()
 	
 	ai_mutex.lock()
-	if (m._left_spell!=""):	_cur_spell.append(STree.spell_tree.search_in_spell_list(m._left_spell))
-	if (m._right_spell!=""):	_cur_spell.append(STree.spell_tree.search_in_spell_list(m._right_spell))
+	
+	if (m._left_spell!=""):
+		var a:Spell = STree.spell_tree.search_in_spell_list(m._left_spell)	
+		a.set_caster(self.get_parent())
+		_cur_spell.append(a)
+		
+	if (m._right_spell!=""):
+		var a:Spell = STree.spell_tree.search_in_spell_list(m._right_spell)	
+		a.set_caster(self.get_parent())
+		_cur_spell.append(a)
 	if (m._left_target!=-1):	call_deferred("add_cur_tagets",m._left_target)
 	if (m._right_target!=-1):	call_deferred("add_cur_tagets",m._right_target)
 	ai_mutex.unlock()
-	# _cur_targets = m._left_target
-	## 输入本回合的手势
-	## Enter the gesture for this round
-	#if _cur_input_left == _gestures[4] or _cur_input_left == _gestures[4].to_upper():
-		#_cur_input_left = _gestures[2]
-		#_cur_input_right = _gestures[2]
-	#else:
-		#_cur_input_left = _gestures[4]
-		#_cur_input_right = _gestures[4]
-	#print(_cur_input_left,_cur_input_right)
-	#
-	## 预处理手势，相同记为大写
-	#if _cur_input_left == _cur_input_right:
-		#_cur_input_left=_cur_input_left.to_upper()
-		#_cur_input_right=_cur_input_right.to_upper()
-	#
-	## 将输入传入历史输入中，判断有无可用法术
-	#_his_input_left += _cur_input_left
-	#_his_input_right += _cur_input_right
-	#_his_input_left = _his_input_left.right(10)
-	#_his_input_right = _his_input_right.right(10)
-	#
-	#
-	#
-	#
-	#
-	## 判断本回合有无可用法术
-	##Determine if there are any available spells in this round
-	#_left_vaild_spells = spell_tree.search_valid_spells(_his_input_left)
-	#_right_vaild_spells = spell_tree.search_valid_spells(_his_input_right)
-#
-	#if _left_vaild_spells.size() > 0:
-		#print("left valid spell:",_left_vaild_spells[0].getName())
-		## 如有选择哪个释放
-		##If there is a choice, which one to release
-		#_cur_spell.append(_left_vaild_spells[0])
-		#
-#
-		## 释放目标怎么选择
-		##How to choose the target for release
-		#var index = 0
-		#call_deferred("add_cur_tagets",index)
-#
-		#
-		#
-		#
-	#if _right_vaild_spells.size() > 0:
-		##print("left valid spell:",_right_vaild_spells[0].getName())
-		## 如有选择哪个释放
-		##If there is a choice, which one to release
-		#_cur_spell.append(_right_vaild_spells[0])
-#
-		## 释放目标怎么选择
-		##How to choose the target for release
-		#var index = 0
-		#call_deferred("add_cur_tagets",index)
-
-
 	
 	call_deferred("_emit_gesture_signal")
 	call_deferred("_finish_thread")

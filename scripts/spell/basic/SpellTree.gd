@@ -1,4 +1,4 @@
-extends Node
+extends Node 
 class_name SpellTree
 # 存储法术的字典树
 var root: SpellNode
@@ -27,6 +27,11 @@ func creat_spell_tree():
 	add_spell("fpsfw",SummonTroll.new(),root)
 	add_spell("wfpsfw",SummonGaint.new(),root)
 
+	add_spell("dsfffC",Disease.new(),root)
+	add_spell("dfw",CureLightWounds.new(),root)
+	add_spell("dfpw",CureHeavyWounds.new(),root)
+	
+	add_spell("swwC",FireStorm.new(),root)
 	#
 	#add_spell("w",SummonGoblin.new(),root)
 	#add_spell("sppp",Sheild.new(),root)
