@@ -14,5 +14,5 @@ This project aims to implement a two-player tabletop zero-sum battle game named 
 **Development tools**: You can use the built-in editor of Godot for development, or you can use Code editors that support GDScript or C#, such as Visual Studio Code, etc.    
 
 ## Usage method
-**Run the game**: Open the project in the Godot editor and click the Run button to start the game. The game can also be exported as an executable file and run on the corresponding platform.\n
+**Run the game**: Open the project in the Godot editor and click the Run button to start the game. The game can also be exported as an executable file and run on the corresponding platform.  
 **Modify the game**: If you want to modify or expand the game, you can open the project in the Godot editor and modify the resource file, scene file or script file as needed.  
