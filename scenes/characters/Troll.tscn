@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=4 uid="uid://ci0fbr58o4jek"]
 
 [ext_resource type="Script" path="res://scripts/character/summon/troll.gd" id="1_bok22"]
-[ext_resource type="Texture2D" uid="uid://wqcxevwsfpyg" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f0.png" id="2_ljm7l"]
-[ext_resource type="Texture2D" uid="uid://b5jtc7rp6ne6p" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f1.png" id="3_f33pp"]
-[ext_resource type="Texture2D" uid="uid://cyy7g6ow2w7iv" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f2.png" id="4_l4qht"]
-[ext_resource type="Texture2D" uid="uid://dg62ijuojp223" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f3.png" id="5_vys5b"]
+[ext_resource type="Texture2D" uid="uid://wqcxevwsfpyg" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f0.png" id="2_ljm7l"]
+[ext_resource type="Texture2D" uid="uid://b5jtc7rp6ne6p" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f1.png" id="3_f33pp"]
+[ext_resource type="Texture2D" uid="uid://cyy7g6ow2w7iv" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f2.png" id="4_l4qht"]
+[ext_resource type="Texture2D" uid="uid://dg62ijuojp223" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/big_zombie_idle_anim_f3.png" id="5_vys5b"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_x8bbu"]
 [ext_resource type="Script" path="res://scripts/target.gd" id="7_8w12r"]
 

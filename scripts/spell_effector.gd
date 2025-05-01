@@ -80,12 +80,12 @@ func spell_effect():
 			if (_spell.caster == player1):
 				_spell.creature.set_controller(player1)
 				$SummonGenerator.place_creature(_spell.creature)
-				Game_Status.add_p1_creatures_attacks(_spell.creature.get_damage())
+				Game_Status.add_p1_creatures_attacks(Game_Status.get_p1_creatures_attacks()+_spell.creature.get_damage())
 				character_manager.add_creature(_spell.creature)
 			if (_spell.caster == player2):
 				_spell.creature.set_controller(player2)
 				$SummonGenerator2.place_creature(_spell.creature)
-				Game_Status.set_p2_creatures_attacks(_spell.creature.get_damage())
+				Game_Status.set_p2_creatures_attacks(Game_Status.get_p2_creatures_attacks()+_spell.creature.get_damage())
 				character_manager.add_creature(_spell.creature)
 	Events.effect_end.emit()
 	spellEvents.clear()

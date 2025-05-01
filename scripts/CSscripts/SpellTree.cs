@@ -20,24 +20,24 @@ public partial class SpellTree : Node
     private void CreateSpellTree()
     {
     // 基础防御法术（核心战略）
-    AddSpell("p", new Spell("p", 0), root); // 阻挡召唤物和sd
+    AddSpell("p", new Spell("p", 1), root); // 阻挡召唤物和sd
     
     // 直接伤害法术（按伤害效率调整）
-    AddSpell("sd", new Spell("sd", 5), root);        // 2手势/1伤害=4效率
+    AddSpell("sd", new Spell("sd", 2), root);        // 2手势/1伤害=4效率
     AddSpell("wfp", new Spell("wfp", 10), root);     // 3手势/2伤害=5效率
     AddSpell("wpfd", new Spell("wpfd", 15), root);   // 4手势/3伤害=4.5效率 
     AddSpell("dffdd", new Spell("dffdd", 25), root); // 5手势/5伤害=4.4效率
     AddSpell("fssdd", new Spell("fssdd", 25), root);  // 5手势/5伤害=4效率（因与dffdd重复稍降）
     
     // 召唤物法术（按预期总伤害估值）
-    AddSpell("sfw", new Spell("sfw", 25), root);     // 预期存活2回合：1x2=2
-    AddSpell("psfw", new Spell("psfw", 40), root);   // 预期2x2=4
-    AddSpell("fpsfw", new Spell("fpsfw", 50), root); // 预期3x2=6
-    AddSpell("wfpsfw", new Spell("wfpsfw", 55), root);// 预期4x2=8
+    AddSpell("sfw", new Spell("sfw", 5), root);     // 预期存活2回合：1x2=2
+    AddSpell("psfw", new Spell("psfw", 10), root);   // 预期2x2=4
+    AddSpell("fpsfw", new Spell("fpsfw", 15), root); // 预期3x2=6
+    AddSpell("wfpsfw", new Spell("wfpsfw", 30), root);// 预期4x2=8
     
     // 治疗/解状态法术
-    AddSpell("dfw", new Spell("dfw", 10), root);     // 1治疗=抵消1伤害
-    AddSpell("dfpw", new Spell("dfpw", 20), root);   // 2治疗+解疾病（战略价值高）
+    AddSpell("dfw", new Spell("dfw", 2), root);     // 1治疗=抵消1伤害
+    AddSpell("dfpw", new Spell("dfpw", 5), root);   // 2治疗+解疾病（战略价值高）
     
     // 特殊效果法术
     AddSpell("swwc", new Spell("swwc", 20), root);   // 高风险AOE（5伤害-自伤风险）

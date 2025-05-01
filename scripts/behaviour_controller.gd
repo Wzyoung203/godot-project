@@ -76,7 +76,7 @@ func parse_move_string(move_string: String) -> Move:
 	
 func _ai_thinking():
 	
-	# 用minimax算法找到最佳下一步
+	# 用算法找到最佳下一步
 	var res = ai_csharp.FindBestMove(Game_Status._to_string(),turn_cnt)
 	var m:Move = parse_move_string(res)
 	print(res)

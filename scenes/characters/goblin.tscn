@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=4 uid="uid://de5jkl7s50vdt"]
 
 [ext_resource type="Script" path="res://scripts/character/summon/goblin.gd" id="1_3jytj"]
-[ext_resource type="Texture2D" uid="uid://ccytcsoab3wdq" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f0.png" id="2_q5cyn"]
-[ext_resource type="Texture2D" uid="uid://bxta0mnlhtrdx" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f1.png" id="3_31n88"]
-[ext_resource type="Texture2D" uid="uid://duruwvgd1kyu5" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f2.png" id="4_331yc"]
-[ext_resource type="Texture2D" uid="uid://cad146qpa228n" path="res://adon/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f3.png" id="5_lpyys"]
+[ext_resource type="Texture2D" uid="uid://ccytcsoab3wdq" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f0.png" id="2_q5cyn"]
+[ext_resource type="Texture2D" uid="uid://bxta0mnlhtrdx" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f1.png" id="3_31n88"]
+[ext_resource type="Texture2D" uid="uid://duruwvgd1kyu5" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f2.png" id="4_331yc"]
+[ext_resource type="Texture2D" uid="uid://cad146qpa228n" path="res://asset/0x72_DungeonTilesetII_v1.7/frames/goblin_idle_anim_f3.png" id="5_lpyys"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_3v1ws"]
 [ext_resource type="Script" path="res://scripts/target.gd" id="7_fvndy"]
 

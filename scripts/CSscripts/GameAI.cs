@@ -7,9 +7,10 @@ public partial class GameAI : Node
     private SpellTree spellTree;
     private String[] _gestures = {"f","p","s","w","d","c"};
     private Random random = new Random(); 
-    private int simulationCount = 10000; // 蒙特卡罗模拟次数
+    private int simulationCount = 7000; // 蒙特卡罗模拟次数
     private int depth = 6; // 蒙特卡罗 搜索深度
     private int diseasen = 0;
+    private int scorethreshold = 40;
     public GameAI()
     {
         spellTree = new SpellTree();
@@ -19,9 +20,28 @@ public partial class GameAI : Node
     {
         
         GameStatus status = GameStatus.FromString(gameState);
-        
-        return FindBestMoveMonteCarlo(status);
-        
+        if (status.P2IsDisease > 0){
+            if (diseasen == 0){
+                diseasen +=1;
+                return new Move("d", "d", null, -1, null, -1).ToString();
+            } 
+             if (diseasen == 1){
+                diseasen +=1;
+                return new Move("f", "s", null, -1, null, -1).ToString();
+            } 
+             if (diseasen == 2){
+                diseasen +=1;
+                return new Move("p", "f", null, -1, null, -1).ToString();
+            } 
+             else{
+                diseasen +=1;
+                return new Move("w", "f", new Spell("dfpw", 20), 1, null, -1).ToString();
+             }
+        }
+        else{
+            diseasen = 0;
+            return FindBestMoveMonteCarlo(status);
+        }
         
         
 
@@ -52,10 +72,22 @@ public partial class GameAI : Node
         }
 
         // 选择访问次数最多的移动
-        Move bestMove = root.Children.OrderByDescending(child => child.VisitCount).First().Move;
-        // GD.Print(root.Children.OrderByDescending(child => child.VisitCount).First().TotalScore); 
-        // GD.Print(root.Children.OrderByDescending(child => child.TotalScore).First().TotalScore); 
-        return bestMove.ToString();
+        // Move bestMove = root.Children.OrderByDescending(child => child.VisitCount).First().Move;
+        // // GD.Print(root.Children.OrderByDescending(child => child.VisitCount).First().TotalScore); 
+        // // GD.Print(root.Children.OrderByDescending(child => child.TotalScore).First().TotalScore); 
+        // return bestMove.ToString();
+            double epsilon = 0.1; // 10% 概率随机选择
+
+        if (random.NextDouble() < epsilon)
+        {
+            // 随机选择一个子节点
+            return root.Children.ToList()[random.Next(root.Children.Count)].Move.ToString();
+        }
+        else
+        {
+            // 选择访问次数最多的
+            return root.Children.OrderByDescending(c => c.VisitCount).First().Move.ToString();
+        }
     }
 
     private void Backpropagate(TreeNode node, double score)
@@ -71,9 +103,7 @@ public partial class GameAI : Node
     private TreeNode ExpandNode(TreeNode node)
     {
         // 优先扩展能触发高评分法术的节点
-        var sortedMoves = node.Moves
-        .OrderByDescending(m => (m.LeftSpell?.Score ?? 0) + (m.RightSpell?.Score ?? 0))
-        .ToList();
+        var sortedMoves = node.Moves.OrderBy(m => random.Next()).ToList();
         foreach (var move in sortedMoves)
         {
             GameStatus currentState = node.State.Clone();
@@ -94,13 +124,23 @@ public partial class GameAI : Node
 
     private TreeNode SelectNode(TreeNode node)
     {
-        while (node.Moves.Count == node.Children.Count) // 所有可能的移动都已展开
+        while (true)
         {
-            node = node.Children.OrderByDescending(child => 
-                child.TotalScore  + Math.Sqrt(2.5 * Math.Log(node.VisitCount) / child.VisitCount)
-            ).First();
+            // 优先选择未完全扩展的节点
+            if (node.Children.Count < node.Moves.Count)
+                return node;
+
+            // 标准UCB公式
+            node = node.Children.OrderByDescending(child =>
+            {
+                if (child.VisitCount == 0) return double.MaxValue; // 未访问节点绝对优先
+                
+                double exploitation = child.TotalScore / child.VisitCount;
+                double exploration = Math.Sqrt(2 * Math.Log(node.VisitCount) / child.VisitCount);
+                
+                return exploitation + exploration;
+            }).First();
         }
-        return node;
     }
 
     private double Simulate(GameStatus state, bool isCurrentPlayerMCTS)
@@ -163,11 +203,13 @@ public partial class GameAI : Node
         {
             newState.P2LeftHand += move.LeftGesture;
             newState.P2RightHand += move.RightGesture;
+            newState.P2Hp -= newState.P1CreaturesAttacks;
         }
         else
         {
             newState.P1LeftHand += move.LeftGesture;
             newState.P1RightHand += move.RightGesture;
+            newState.P1Hp -= newState.P2CreaturesAttacks;
         }
 
 
@@ -189,12 +231,12 @@ public partial class GameAI : Node
             case "p":
                 if (isMCTSPlayer)
                 {
-                    status.potentialScore += status.P1CreaturesAttacks * 20; // 阻挡召唤物伤害
+                    status.potentialScore += status.P1CreaturesAttacks * 2; // 阻挡召唤物伤害
                     status.P1CreaturesAttacks = 0; // 重置敌方召唤物
                 }
                 else
                 {
-                    status.potentialScore -= status.P2CreaturesAttacks * 20;
+                    status.potentialScore -= status.P2CreaturesAttacks * 2;
                     status.P2CreaturesAttacks = 0;
                 }
                 break;
@@ -297,10 +339,9 @@ public partial class GameAI : Node
         string historyRight  = isMCTSPlayer ? status.P2RightHand : status.P1RightHand;
 
         // 尝试所有手势组合
-        foreach (var leftGesture in GetPriorityGestures(historyLeft))
+        foreach (var leftGesture in _gestures)
         {
-
-            foreach (var rightGesture in GetPriorityGestures(historyRight))
+            foreach (var rightGesture in _gestures)
             {
 
                 if (rightGesture == "p" && leftGesture == "p"){
@@ -341,17 +382,16 @@ public partial class GameAI : Node
                             rightTarget = 1 - target;
                         }
 
-                        // 如果有法术可用，则不选择空法术
-                        if ((leftSpell != null || rightSpell != null) || (leftSpells.Count == 0 && rightSpells.Count == 0))
-                        {
-                            moves.Add(new Move(leftGesture, rightGesture, leftSpell, leftTarget, rightSpell, rightTarget));
-                        }
+                        if (leftSpell==null&&leftSpells.Count>1)   continue;
+                        if (rightSpell==null&&rightSpells.Count>1)   continue;
+
+                        moves.Add(new Move(leftGesture, rightGesture, leftSpell, leftTarget, rightSpell, rightTarget));
                     }
                 }
             }
         }
 
-        moves = moves.OrderBy(x => random.Next()).ToList();   
+        // moves = moves.OrderBy(x => random.Next()).ToList();   
         return moves;
     }
 
@@ -379,12 +419,12 @@ public partial class GameAI : Node
 
         // 1. HP差值（权重：12）
         int hpDiff = status.P2Hp - status.P1Hp;
-        score += hpDiff * 10;
+        score += hpDiff * 8;
 
         // 2. 召唤物伤害（动态权重：6 + 回合数/2）
-        int p1SummonDmg = status.P1CreaturesAttacks * (status.P2IsDisease > 0 ? 3 : 2);
-        int p2SummonDmg = status.P2CreaturesAttacks * (status.P1IsDisease > 0 ? 3 : 2);
-        score += (p2SummonDmg - p1SummonDmg) * 6;
+        // int p1SummonDmg = status.P1CreaturesAttacks * (status.P2IsDisease > 0 ? 3 : 2);
+        // int p2SummonDmg = status.P2CreaturesAttacks * (status.P1IsDisease > 0 ? 3 : 2);
+        // score += (p2SummonDmg - p1SummonDmg) * 6;
 
         //3. 疾病效果（剩余回合越多，奖励越高）
         if (status.P1IsDisease > 0)
@@ -392,18 +432,13 @@ public partial class GameAI : Node
         if (status.P2IsDisease > 0)
             score -= 100 * 20;
 
-        // 4. 法术构建进度奖励（权重：2）
-        int progressBonus = 0;
-        progressBonus += GetSpellProgressBonus(status.P2LeftHand);
-        progressBonus += GetSpellProgressBonus(status.P2RightHand);
-        score += progressBonus;
 
         // 5. 潜在分数（权重：1.5）
         score += (int)(status.potentialScore);
         // GD.Print($"HP差值: {hpDiff}, 召唤物: {(p2SummonDmg - p1SummonDmg) * (6)}, " +
         //   $"疾病: {status.P2IsDisease}, " +
         //   $"进度: {progressBonus }, 潜在: {status.potentialScore}");
-        return score;
+        return score>scorethreshold ? 1:0;
     }
 
     private int GetSpellProgressBonus(string gestureHistory)

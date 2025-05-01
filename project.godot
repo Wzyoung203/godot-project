@@ -26,7 +26,7 @@ Game_Status="*res://global/game_status.gd"
 window/size/viewport_width=720
 window/size/viewport_height=480
 window/stretch/mode="canvas_items"
-mouse_cursor/custom_image="res://adon/cursor/PNG/Basic/Default/pointer_c_shaded.png"
+mouse_cursor/custom_image="res://asset/cursor/PNG/Basic/Default/pointer_c_shaded.png"
 
 [dotnet]
 
@@ -43,7 +43,7 @@ player=""
 
 [gui]
 
-theme/custom_font="res://adon/fonts/Xolonium-Regular.ttf"
+theme/custom_font="res://asset/fonts/Xolonium-Regular.ttf"
 
 [rendering]
 
